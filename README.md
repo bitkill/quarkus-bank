@@ -1,5 +1,11 @@
 # quarkus-bank project
 
+Quarkus version of [nikitsenka/bank-java](https://github.com/nikitsenka/bank-java) with the purpose of benchmarking it in aws vs go.
+
+At the time I did this, the java version is ~3yrs old, so I thought it needed some work.
+
+Inspired by [Kai Hendry's java vs go blog post](https://dabase.com/blog/2021/java-vs-go-load-test/#load-testing-gojava-on-aws).
+
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
