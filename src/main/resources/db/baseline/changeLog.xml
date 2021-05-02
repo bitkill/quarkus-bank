@@ -1,0 +1,43 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd"
+    logicalFilePath="db/baseline/changeLog.xml">
+
+    <changeSet author="bitkill" id="1">
+
+        <!-- for testing purposes -->
+        <validCheckSum>ANY</validCheckSum>
+
+        <!-- sequence -->
+        <createSequence sequenceName="client_sequence" startValue="1" incrementBy="1"/>
+
+        <!-- client table -->
+        <createTable tableName="client">
+            <column name="id" type="int8">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(20)"/>
+            <column name="email" type="varchar(20)"/>
+            <column name="phone" type="varchar(20)"/>
+        </createTable>
+
+        <!-- sequence -->
+        <createSequence sequenceName="transaction_sequence" startValue="1" incrementBy="1"/>
+
+        <!-- transaction table -->
+        <createTable tableName="transaction">
+            <column name="id" type="int8">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="from_client_id" type="int8"/>
+            <column name="to_client_id" type="int8"/>
+            <column name="amount" type="int8"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

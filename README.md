@@ -14,6 +14,7 @@ If you want to learn more about Quarkus, please visit its website: https://quark
 
 You can run your application in dev mode that enables live coding using:
 ```shell script
+docker-compose up # for postgres
 ./gradlew quarkusDev
 ```
 
@@ -28,21 +29,13 @@ The application can be packaged using:
 It produces the `quarkus-run.jar` file in the `build/quarkus-app/` directory.
 Be aware that it’s not an _über-jar_ as the dependencies are copied into the `build/quarkus-app/lib/` directory.
 
-If you want to build an _über-jar_, execute the following command:
-```shell script
-./gradlew build -Dquarkus.package.type=uber-jar
-```
-
 The application is now runnable using `java -jar build/quarkus-app/quarkus-run.jar`.
 
 ## Creating a native executable
 
-You can create a native executable using: 
-```shell script
-./gradlew build -Dquarkus.package.type=native
-```
+> WARNING: Takes a long time (~8m on my 15" 2018 MBP, needs a lot of ram)
 
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using: 
+You can create a native executable via docker container:
 ```shell script
 ./gradlew build -Dquarkus.package.type=native -Dquarkus.native.container-build=true
 ```
@@ -51,13 +44,17 @@ You can then execute your native executable with: `./build/quarkus-bank-1.0.0-SN
 
 If you want to learn more about building native executables, please consult https://quarkus.io/guides/gradle-tooling.
 
-## Related guides
+## Sure, all this is great, but I need my docker image!
+Generate it using:
+```bash
+./gradlew build -Dquarkus.container-image.build=true
+```
 
+## Testing with JMeter
 
-## Provided examples
-
-### RESTEasy JSON serialisation using Jackson
-
-This example demonstrate RESTEasy JSON serialisation by letting you list, add and remove quark types from a list. Quarked!
-
-[Related guide section...](https://quarkus.io/guides/rest-json#creating-your-first-json-rest-service)
+```shell
+brew install jmeter
+git clone git@github.com:nikitsenka/bank-test.git
+cd bank-test/jmeter
+jmeter -JHOST=localhost -JPORT=8080 -JNUM_USERS=1 -n -t bank-test.jmx -l results.csv
+```

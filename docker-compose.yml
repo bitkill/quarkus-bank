@@ -1,0 +1,13 @@
+version: '3.7'
+
+services:
+
+  # Database container
+  postgres:
+    image: postgres:${POSGRES_VERSION:-13}
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=${POSGRES_USER:-bankjava}
+      - POSTGRES_PASSWORD=${POSGRES_PASSWORD:-secret}
+      - POSTGRES_DB=${POSGRES_DB:-bankjava}
